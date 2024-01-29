@@ -1,27 +1,22 @@
 package br.com.pokedexspring.pokedex.modules.regions.entity;
 
-
-import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
-@Entity(name = "regions")
-public class Region {
+public class Games {
 
-  @Id
-  @GeneratedValue(generator = "UUID")
   private UUID id;
 
   private String name;
 
+  private UUID region;
+
   private UUID generation;
 
-  @CreationTimestamp
+  private String platform;
+
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+
   private LocalDateTime deletedAt;
 }
