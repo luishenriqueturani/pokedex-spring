@@ -1,5 +1,6 @@
-package br.com.pokedexspring.pokedex.modules.regions.entity;
+package br.com.pokedexspring.pokedex.modules.pokemons.entity;
 
+import br.com.pokedexspring.pokedex.modules.regions.entity.Games;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,33 +16,30 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@SQLDelete(sql = "UPDATE games SET deleted_at = now() WHERE id=?")
+@Entity(name = "dex_entries")
+@SQLDelete(sql = "UPDATE dex_entries SET deleted_at = now() WHERE id=?")
 @Where(clause = "deleted_at IS NULL")
-public class Games {
+public class DexEntries {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column
-  private String name;
-
-  @Column(name = "region_id")
-  private UUID regionId;
+  @Column(name = "pokemon_id")
+  private UUID pokemonId;
 
   @OneToOne
-  @JoinColumn(name = "region_id", insertable = false, updatable = false)
-  private Regions regions;
+  @JoinColumn(name = "pokemon_id", insertable = false, updatable = false)
+  private Pokemons pokemons;
 
-  @Column(name = "generation_id")
-  private UUID generationId;
+  @Column(name = "game_id")
+  private UUID gameId;
 
   @OneToOne
-  @JoinColumn(name = "generation_id", insertable = false, updatable = false)
-  private Generations generations;
+  @JoinColumn(name = "game_id", insertable = false, updatable = false)
+  private Games games;
 
-  @Column
-  private String platform;
+  @Column(length = 1028)
+  private String entry;
 
   @CreationTimestamp
   private LocalDateTime createdAt;

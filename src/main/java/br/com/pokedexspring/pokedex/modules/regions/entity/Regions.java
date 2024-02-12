@@ -1,5 +1,6 @@
 package br.com.pokedexspring.pokedex.modules.regions.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,38 +11,30 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@SQLDelete(sql = "UPDATE games SET deleted_at = now() WHERE id=?")
+@Entity(name = "regions")
+@SQLDelete(sql = "UPDATE regions SET deleted_at = now() WHERE id=?")
 @Where(clause = "deleted_at IS NULL")
-public class Games {
+public class Regions {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @GeneratedValue(generator = "UUID")
   private UUID id;
 
   @Column
   private String name;
 
-  @Column(name = "region_id")
-  private UUID regionId;
-
-  @OneToOne
-  @JoinColumn(name = "region_id", insertable = false, updatable = false)
-  private Regions regions;
-
   @Column(name = "generation_id")
   private UUID generationId;
 
-  @OneToOne
+  @OneToMany
   @JoinColumn(name = "generation_id", insertable = false, updatable = false)
-  private Generations generations;
-
-  @Column
-  private String platform;
+  private List<Generations> generations;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
