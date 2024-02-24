@@ -1,6 +1,6 @@
-package br.com.pokedexspring.pokedex.modules.types.entity;
+package br.com.pokedexspring.pokedex.modules.moves.entity;
 
-import br.com.pokedexspring.pokedex.modules.pokemons.entity.Pokemons;
+import br.com.pokedexspring.pokedex.modules.types.entity.Types;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,40 +11,41 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE pokemon_resistances SET deleted_at = now() WHERE id=?")
+@SQLDelete(sql = "UPDATE moves SET deleted_at = now() WHERE id=?")
 @Where(clause = "deleted_at IS NULL")
-public class PokemonResistances {
+public class Moves {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column(name = "pokemon_id")
-  private UUID pokemonId;
-
-  @OneToOne
-  @JoinColumn(name = "pokemon_id", insertable = false, updatable = false)
-  private Pokemons pokemons;
-
   @Column
+  private String name;
+
+  @Column(name = "type_id")
   private UUID typeId;
 
-  @OneToMany
+  @OneToOne(targetEntity = Types.class)
   @JoinColumn(name = "type_id", insertable = false, updatable = false)
-  private List<Types> types;
+  private Types types;
+
+  @Column
+  private String category;
+
 
   @CreationTimestamp
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
   @Column
   private LocalDateTime deletedAt;
+
 }

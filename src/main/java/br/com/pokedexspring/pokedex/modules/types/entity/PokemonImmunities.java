@@ -26,7 +26,7 @@ public class PokemonImmunities {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column
+  @Column(name = "pokemon_id")
   private UUID pokemonId;
 
   @OneToOne

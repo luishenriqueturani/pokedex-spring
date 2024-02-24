@@ -1,5 +1,7 @@
 package br.com.pokedexspring.pokedex.modules.pokemons.entity;
 
+import br.com.pokedexspring.pokedex.modules.regions.entity.Generations;
+import br.com.pokedexspring.pokedex.modules.types.entity.Types;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,20 +32,40 @@ public class Pokemons {
   @Column
   private String name;
 
-  @Column
-  private UUID type1;
+  @Column(name = "type1")
+  private UUID type1Id;
 
-  @Column
-  private UUID type2;
+  @OneToOne(targetEntity = Types.class)
+  @JoinColumn(name = "type1", insertable = false, updatable = false)
+  private Types type1;
 
-  @Column
-  private UUID generation;
+  @Column(name = "type2")
+  private UUID type2Id;
 
-  @Column
-  private UUID evolveTo;
+  @OneToOne(targetEntity = Types.class)
+  @JoinColumn(name = "type2", insertable = false, updatable = false)
+  private Types type2;
 
-  @Column
-  private UUID preEvolution;
+  @Column(name = "generation_id")
+  private UUID generationId;
+
+  @OneToOne(targetEntity = Generations.class)
+  @JoinColumn(name = "generation_id", insertable = false, updatable = false)
+  private Generations generation;
+
+  @Column(name = "evolve_to")
+  private UUID evolveToId;
+
+  @OneToOne(targetEntity = Pokemons.class)
+  @JoinColumn(name = "evolve_to", insertable = false, updatable = false)
+  private Pokemons evolveTo;
+
+  @Column(name = "pre_evolution")
+  private UUID preEvolutionId;
+
+  @OneToOne(targetEntity = Pokemons.class)
+  @JoinColumn(name = "pre_evolution", insertable = false, updatable = false)
+  private Pokemons preEvolution;
 
   @Column
   private float height;
