@@ -17,7 +17,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity(name = "type_advantages")
 @SQLDelete(sql = "UPDATE type_advantages SET deleted_at = now() WHERE id=?")
-@Where(clause = "deleted_at IS NULL")
 public class TypeAdvantages {
 
   @Id

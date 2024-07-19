@@ -17,7 +17,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE generations SET deleted_at = now() WHERE id=?")
-@Where(clause = "deleted_at IS NULL")
 public class Generations {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

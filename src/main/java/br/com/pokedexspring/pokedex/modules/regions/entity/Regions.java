@@ -19,7 +19,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity(name = "regions")
 @SQLDelete(sql = "UPDATE regions SET deleted_at = now() WHERE id=?")
-@Where(clause = "deleted_at IS NULL")
 public class Regions {
 
   @Id

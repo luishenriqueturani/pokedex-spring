@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -19,7 +20,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE pokemons SET deleted_at = now() WHERE id=?")
-@Where(clause = "deleted_at IS NULL")
 public class Pokemons {
 
   @Id
@@ -56,9 +56,9 @@ public class Pokemons {
   @Column(name = "evolve_to")
   private UUID evolveToId;
 
-  @OneToOne(targetEntity = Pokemons.class)
+  @OneToMany(targetEntity = Pokemons.class)
   @JoinColumn(name = "evolve_to", insertable = false, updatable = false)
-  private Pokemons evolveTo;
+  private List<Pokemons> evolveTo;
 
   @Column(name = "pre_evolution")
   private UUID preEvolutionId;

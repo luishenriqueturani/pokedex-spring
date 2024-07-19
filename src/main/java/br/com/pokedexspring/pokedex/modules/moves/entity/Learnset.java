@@ -19,7 +19,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE learnset SET deleted_at = now() WHERE id=?")
-@Where(clause = "deleted_at IS NULL")
 public class Learnset {
 
   @Id
