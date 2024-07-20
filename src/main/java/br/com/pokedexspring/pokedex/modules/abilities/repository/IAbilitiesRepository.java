@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IAbilitiesRepository extends JpaRepository<Abilities, UUID> {
-  List<Abilities> findManyWhereDeletedAtIsNull();
+  List<Abilities> findByDeletedAtIsNull();
 }
