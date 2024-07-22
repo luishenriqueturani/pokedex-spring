@@ -32,6 +32,9 @@ public class Pokemons {
   @Column
   private String name;
 
+  @Column
+  private String label;
+
   @Column(name = "type1")
   private UUID type1Id;
 

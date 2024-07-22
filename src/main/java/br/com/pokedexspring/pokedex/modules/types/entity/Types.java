@@ -24,6 +24,9 @@ public class Types {
   private UUID id;
 
   @Column
+  private String name;
+
+  @Column
   private String label;
 
 

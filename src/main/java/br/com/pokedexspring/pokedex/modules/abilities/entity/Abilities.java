@@ -27,6 +27,9 @@ public class Abilities {
   private String name;
 
   @Column
+  private String label;
+
+  @Column
   private String description;
 
   @Column(name = "generation_id")

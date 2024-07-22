@@ -25,6 +25,9 @@ public class Games {
   @Column
   private String name;
 
+  @Column
+  private String label;
+
   @Column(name = "region_id")
   private UUID regionId;
 

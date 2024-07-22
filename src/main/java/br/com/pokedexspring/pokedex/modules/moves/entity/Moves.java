@@ -27,6 +27,9 @@ public class Moves {
   @Column
   private String name;
 
+  @Column
+  private String label;
+
   @Column(name = "type_id")
   private UUID typeId;
 

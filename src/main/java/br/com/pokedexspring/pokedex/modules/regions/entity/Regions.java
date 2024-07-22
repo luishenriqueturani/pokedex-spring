@@ -28,6 +28,9 @@ public class Regions {
   @Column
   private String name;
 
+  @Column
+  private String label;
+
   @Column(name = "generation_id")
   private UUID generationId;
 
