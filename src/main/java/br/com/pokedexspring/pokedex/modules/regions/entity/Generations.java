@@ -15,9 +15,15 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "generations")
 @SQLDelete(sql = "UPDATE generations SET deleted_at = now() WHERE id=?")
 public class Generations {
+
+  public Generations(UUID regionId, int number) {
+    this.regionId = regionId;
+    this.number = number;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;

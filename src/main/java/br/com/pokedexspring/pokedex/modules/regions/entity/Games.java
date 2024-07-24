@@ -18,6 +18,14 @@ import java.util.UUID;
 @Entity
 @SQLDelete(sql = "UPDATE games SET deleted_at = now() WHERE id=?")
 public class Games {
+
+  public Games(String name, String label, UUID regionId, UUID generationId) {
+    this.name = name;
+    this.label = label;
+    this.regionId = regionId;
+    this.generationId = generationId;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;

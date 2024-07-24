@@ -9,9 +9,5 @@ import java.util.UUID;
 
 public interface IRegionRepository extends JpaRepository<Regions, UUID> {
 
-  List<Regions> findAll();
-
-  Optional<Regions> findById(UUID id);
-
 
 }

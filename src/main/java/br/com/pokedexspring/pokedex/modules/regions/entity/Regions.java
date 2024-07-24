@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,8 +18,14 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE regions SET deleted_at = now() WHERE id=?")
 public class Regions {
 
+  public Regions(String name, String label){
+    this.name = name;
+    this.label = label;
+  }
+
   @Id
-  @GeneratedValue(generator = "UUID")
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(updatable = false, nullable = false, columnDefinition = "BINARY(16)")
   private UUID id;
 
   @Column
@@ -39,10 +42,13 @@ public class Regions {
   private List<Generations> generations;
 
   @CreationTimestamp
+  @Column(name = "created_at")
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
+  @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 }

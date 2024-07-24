@@ -16,6 +16,7 @@ public class Requests {
 
   public HttpResponse<String> sendRequest(String url, HttpMethod method, Optional<Map<String, String>> headers, Optional<String> body) throws Exception {
     try (HttpClient client = HttpClient.newHttpClient()) {
+      Thread.sleep(1000);
 
       HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
           .uri(URI.create(url))
