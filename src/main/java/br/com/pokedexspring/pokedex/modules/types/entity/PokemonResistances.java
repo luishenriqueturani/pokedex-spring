@@ -8,42 +8,62 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "pokemon_resistances")
 @SQLDelete(sql = "UPDATE pokemon_resistances SET deleted_at = now() WHERE id=?")
 public class PokemonResistances {
 
+  public PokemonResistances(long id, long pokemonId, Pokemons pokemons, long typeId, List<Types> types) {
+    this.id = id;
+    this.pokemonId = pokemonId;
+    this.pokemons = pokemons;
+    this.typeId = typeId;
+    this.types = types;
+  }
+
+  public PokemonResistances(long id, long pokemonId, long typeId) {
+    this.id = id;
+    this.pokemonId = pokemonId;
+    this.typeId = typeId;
+  }
+
+  public PokemonResistances(long id, Pokemons pokemons, List<Types> types) {
+    this.id = id;
+    this.pokemons = pokemons;
+    this.types = types;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private long id;
 
   @Column(name = "pokemon_id")
-  private UUID pokemonId;
+  private long pokemonId;
 
   @OneToOne
   @JoinColumn(name = "pokemon_id", insertable = false, updatable = false)
   private Pokemons pokemons;
 
-  @Column
-  private UUID typeId;
+  @Column(name = "type_id")
+  private long typeId;
 
   @OneToMany
   @JoinColumn(name = "type_id", insertable = false, updatable = false)
   private List<Types> types;
 
+  @Column(name = "created_at")
   @CreationTimestamp
   private LocalDateTime createdAt;
+
+  @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 }

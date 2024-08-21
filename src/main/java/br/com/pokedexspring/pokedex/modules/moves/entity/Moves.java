@@ -8,21 +8,43 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "moves")
 @SQLDelete(sql = "UPDATE moves SET deleted_at = now() WHERE id=?")
 public class Moves {
 
+  public Moves(long id, String name, String label, long typeId, Types types, String category) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.typeId = typeId;
+    this.types = types;
+    this.category = category;
+  }
+
+  public Moves(long id, String name, String label, long typeId, String category) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.typeId = typeId;
+    this.category = category;
+  }
+
+  public Moves(long id, String name, String label, Types types, String category) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.types = types;
+    this.category = category;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private long id;
 
   @Column
   private String name;
@@ -31,7 +53,7 @@ public class Moves {
   private String label;
 
   @Column(name = "type_id")
-  private UUID typeId;
+  private long typeId;
 
   @OneToOne(targetEntity = Types.class)
   @JoinColumn(name = "type_id", insertable = false, updatable = false)
@@ -40,14 +62,15 @@ public class Moves {
   @Column
   private String category;
 
-
+  @Column(name = "created_at")
   @CreationTimestamp
   private LocalDateTime createdAt;
 
+  @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 
 }

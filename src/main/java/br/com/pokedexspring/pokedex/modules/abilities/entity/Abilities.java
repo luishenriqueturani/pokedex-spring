@@ -6,22 +6,44 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "abilities")
 @SQLDelete(sql = "UPDATE abilities SET deleted_at = now() WHERE id=?")
 public class Abilities {
 
+  public Abilities(long id, String name, String label, String description, long generation, List<Generations> generations) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.description = description;
+    this.generation = generation;
+    this.generations = generations;
+  }
+
+  public Abilities(long id, String name, String label, String description, long generation) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.description = description;
+    this.generation = generation;
+  }
+
+  public Abilities(long id, String name, String label, String description, List<Generations> generations) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.description = description;
+    this.generations = generations;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private long id;
 
   @Column
   private String name;
@@ -33,18 +55,20 @@ public class Abilities {
   private String description;
 
   @Column(name = "generation_id")
-  private UUID generation;
+  private long generation;
 
   @OneToMany(targetEntity = Generations.class)
   @JoinColumn(name = "generation_id", insertable = false, updatable = false)
   private List<Generations> generations;
 
+  @Column(name = "created_at")
   @CreationTimestamp
   private LocalDateTime createdAt;
 
+  @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 }

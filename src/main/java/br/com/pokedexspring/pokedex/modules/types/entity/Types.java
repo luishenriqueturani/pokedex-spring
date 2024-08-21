@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -19,9 +17,14 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE types SET deleted_at = now() WHERE id=?")
 public class Types {
 
+  public Types(long id, String name, String label) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private long id;
 
   @Column
   private String name;
@@ -29,13 +32,14 @@ public class Types {
   @Column
   private String label;
 
-
+  @Column(name = "created_at")
   @CreationTimestamp
   private LocalDateTime createdAt;
 
+  @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 }

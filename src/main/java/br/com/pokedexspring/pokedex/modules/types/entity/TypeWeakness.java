@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -19,30 +17,51 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE type_weakness SET deleted_at = now() WHERE id=?")
 public class TypeWeakness {
 
+  public TypeWeakness(long id, long typeRefId, Types typeRef, long weakId, Types weak) {
+    this.id = id;
+    this.typeRefId = typeRefId;
+    this.typeRef = typeRef;
+    this.weakId = weakId;
+    this.weak = weak;
+  }
+
+  public TypeWeakness(long id, Types typeRef, Types weak) {
+    this.id = id;
+    this.typeRef = typeRef;
+    this.weak = weak;
+  }
+
+  public TypeWeakness(long id, long typeRefId, long weakId) {
+    this.id = id;
+    this.typeRefId = typeRefId;
+    this.weakId = weakId;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private long id;
 
   @Column(name = "type_ref")
-  private UUID typeRefId;
+  private long typeRefId;
 
   @OneToOne(targetEntity = Types.class)
   @JoinColumn(name = "type_ref", insertable = false, updatable = false)
   private Types typeRef;
 
   @Column(name = "weak")
-  private UUID weakId;
+  private long weakId;
 
   @OneToOne(targetEntity = Types.class)
   @JoinColumn(name = "weak", insertable = false, updatable = false)
   private Types weak;
 
+  @Column(name = "created_at")
   @CreationTimestamp
   private LocalDateTime createdAt;
 
+  @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
 
-  @Column
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 }

@@ -9,7 +9,6 @@ import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -18,15 +17,36 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE regions SET deleted_at = now() WHERE id=?")
 public class Regions {
 
-  public Regions(String name, String label){
+  public Regions(long id, String name, String label){
+    this.id = id;
     this.name = name;
     this.label = label;
   }
 
+  public Regions(long id, String name, String label, long generationId, List<Generations> generations) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.generationId = generationId;
+    this.generations = generations;
+  }
+
+  public Regions(long id, String name, String label, List<Generations> generations) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.generations = generations;
+  }
+
+  public Regions(long id, String name, String label, long generationId) {
+    this.id = id;
+    this.name = name;
+    this.label = label;
+    this.generationId = generationId;
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(updatable = false, nullable = false, columnDefinition = "BINARY(16)")
-  private UUID id;
+  private long id;
 
   @Column
   private String name;
@@ -35,7 +55,7 @@ public class Regions {
   private String label;
 
   @Column(name = "generation_id")
-  private UUID generationId;
+  private long generationId;
 
   @OneToMany
   @JoinColumn(name = "generation_id", insertable = false, updatable = false)
