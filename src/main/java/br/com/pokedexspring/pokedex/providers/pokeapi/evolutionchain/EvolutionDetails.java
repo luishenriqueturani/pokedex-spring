@@ -1,5 +1,6 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.evolutionchain;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class EvolutionDetails {
   private Joker relative_physical_stats;
   private Joker time_of_day;
   private Joker trade_species;
-  private Trigger trigger;
+  private Joker trigger;
   private Joker turn_upside_down;
 
 

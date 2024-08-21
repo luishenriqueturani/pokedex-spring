@@ -1,7 +1,10 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.pokemon;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,11 +15,11 @@ public class Pokemon {
 
   private float weight;
 
-  private PokemonType[] types;
+  private List<PokemonType> types;
 
-  private PokemonSpecies species;
+  private Joker species;
 
-  private PokemonAbilities[] abilities;
+  private List<PokemonAbilities> abilities;
 
-  private PokemonMoves[] moves;
+  private List<PokemonMoves> moves;
 }

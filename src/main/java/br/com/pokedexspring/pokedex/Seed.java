@@ -9,13 +9,10 @@ import br.com.pokedexspring.pokedex.modules.regions.repository.IRegionRepository
 import br.com.pokedexspring.pokedex.providers.Email.SendEmail;
 import br.com.pokedexspring.pokedex.providers.Requests;
 import br.com.pokedexspring.pokedex.providers.errors.ErrorHandler;
-import br.com.pokedexspring.pokedex.providers.pokeapi.region.Joker;
 import br.com.pokedexspring.pokedex.providers.pokeapi.region.ResponseRegion;
 import br.com.pokedexspring.pokedex.providers.pokeapi.region.ResponseRegions;
-import br.com.pokedexspring.pokedex.service.Services;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.net.http.HttpResponse;

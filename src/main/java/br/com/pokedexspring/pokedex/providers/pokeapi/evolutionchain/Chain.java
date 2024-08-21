@@ -1,14 +1,17 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.evolutionchain;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class Chain {
-  private EvolutionDetails[] evolution_details;
+  private List<EvolutionDetails> evolution_details;
 
-  private Species species;
+  private Joker species;
 
-  private Chain[] evolves_to;
+  private List<Chain> evolves_to;
 }
