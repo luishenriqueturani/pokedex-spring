@@ -54,7 +54,7 @@ public class Seed {
       for (Joker regions : resRegions.getResults()){
 
         HttpResponse<String> responseRegion = requests.sendRequest(regions.getUrl(), Requests.HttpMethod.GET, Optional.empty(), Optional.empty());
-
+        //System.out.println(responseRegion.body());
         ResponseRegion region = gson.fromJson(responseRegion.body(), ResponseRegion.class);
 
         //salvar a região e geração
@@ -62,7 +62,9 @@ public class Seed {
 
         Generations newGeneration = generationRepository.save(new Generations( snowflakeId.nextId(), newRegion.getId(), region.getId() ));
 
-        for (Joker games : region.getVersion_group()){
+        //System.out.println(region);
+
+        for (Joker games : region.getVersion_groups()){
 
           String[] versions = games.getName().split("-");
 

@@ -11,5 +11,5 @@ import java.util.List;
 public class ResponseRegion {
   private int id;
   private String name;
-  private List<Joker> version_group;
+  private List<Joker> version_groups;
 }
