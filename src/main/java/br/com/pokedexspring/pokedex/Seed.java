@@ -8,7 +8,9 @@ import br.com.pokedexspring.pokedex.modules.regions.repository.IGenerationReposi
 import br.com.pokedexspring.pokedex.modules.regions.repository.IRegionRepository;
 import br.com.pokedexspring.pokedex.providers.Email.SendEmail;
 import br.com.pokedexspring.pokedex.providers.Requests;
+import br.com.pokedexspring.pokedex.providers.SnowflakeId.SnowflakeId;
 import br.com.pokedexspring.pokedex.providers.errors.ErrorHandler;
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import br.com.pokedexspring.pokedex.providers.pokeapi.region.ResponseRegion;
 import br.com.pokedexspring.pokedex.providers.pokeapi.region.ResponseRegions;
 import com.google.gson.Gson;
@@ -37,6 +39,8 @@ public class Seed {
 
     SendEmail sendEmail = new SendEmail();
 
+    SnowflakeId snowflakeId = new SnowflakeId(1, 1);
+
     //Services services = new Services();
 
     Gson gson = new Gson();
@@ -54,9 +58,9 @@ public class Seed {
         ResponseRegion region = gson.fromJson(responseRegion.body(), ResponseRegion.class);
 
         //salvar a região e geração
-        Regions newRegion = regionRepository.save(new Regions(StringUtils.capitalize(region.getName()), region.getName()));
+        Regions newRegion = regionRepository.save(new Regions(snowflakeId.nextId(), StringUtils.capitalize(region.getName()), region.getName()));
 
-        Generations newGeneration = generationRepository.save(new Generations( newRegion.getId(), region.getId() ));
+        Generations newGeneration = generationRepository.save(new Generations( snowflakeId.nextId(), newRegion.getId(), region.getId() ));
 
         for (Joker games : region.getVersion_group()){
 
@@ -70,7 +74,7 @@ public class Seed {
               continue;
             }
 
-            Games newGame = gamesRepository.save(new Games(StringUtils.capitalize(v), v, newRegion.getId(), newGeneration.getId()));
+            Games newGame = gamesRepository.save(new Games(snowflakeId.nextId(), StringUtils.capitalize(v), v, newRegion.getId(), newGeneration.getId()));
 
           }
 
