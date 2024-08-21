@@ -1,5 +1,6 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.pokemon;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,5 +9,5 @@ import lombok.Data;
 public class PokemonAbilities {
   private boolean is_hidden;
   private int slot;
-  private PokemonAbilitiesAbility ability;
+  private Joker ability;
 }

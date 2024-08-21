@@ -1,5 +1,6 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.species;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,9 +11,9 @@ public class SpeciesFlavorTextEntries {
 
   private SpeciesFlavorTextEntriesLanguage language;
 
-  private SpeciesFlavorTextEntriesVersion version;
+  private Joker version;
 
-  private SpeciesGeneration generation;
+  private Joker generation;
 
 
 }

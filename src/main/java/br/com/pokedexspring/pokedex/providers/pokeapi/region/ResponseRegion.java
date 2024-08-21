@@ -1,5 +1,6 @@
 package br.com.pokedexspring.pokedex.providers.pokeapi.region;
 
+import br.com.pokedexspring.pokedex.providers.pokeapi.Joker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
